@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import '../styles/EventDetails.css';
 import { eventService, bookingService } from '../services/api';
@@ -18,9 +18,21 @@ const EventDetails = () => {
   const [showConfirmationModal, setShowConfirmationModal] = useState(false);
   const [bookingReference, setBookingReference] = useState(null);
 
+  const fetchEvent = useCallback(async () => {
+    try {
+      const response = await eventService.getEventById(id);
+      setEvent(response.data);
+      setError('');
+    } catch (err) {
+      setError('Failed to fetch event details');
+    } finally {
+      setIsLoading(false);
+    }
+  }, [id]);
+
   useEffect(() => {
     fetchEvent();
-  }, [id]);
+  }, [fetchEvent]);
 
   const fetchEvent = async () => {
     try {

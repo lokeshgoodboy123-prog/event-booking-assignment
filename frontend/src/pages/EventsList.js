@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import '../styles/Events.css';
 import { eventService } from '../services/api';
@@ -27,11 +27,7 @@ const EventsList = () => {
     }
   }, [searchParams]);
 
-  useEffect(() => {
-    fetchEvents();
-  }, [searchTitle, searchLocation, category, priceRange, selectedDate, page]);
-
-  const fetchEvents = async () => {
+  const fetchEvents = useCallback(async () => {
     setIsLoading(true);
     try {
       // Fetch all events initially
@@ -48,6 +44,10 @@ const EventsList = () => {
       if (priceRange[0] > 0 || priceRange[1] < 500) {
         filteredEvents = filteredEvents.filter(event =>
           event.price >= priceRange[0] && event.price <= priceRange[1]
+
+  useEffect(() => {
+    fetchEvents();
+  }, [fetchEvents]);
         );
       }
 

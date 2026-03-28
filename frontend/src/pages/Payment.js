@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import '../styles/Payment.css';
-import { paymentService } from '../services/api';
 import { formatPrice } from '../utils/currency';
 
 const Payment = () => {

@@ -162,7 +162,6 @@ const ProfileSettings = () => {
   });
 
   const [savedCards, setSavedCards] = useState([]);
-  const [linkedAccounts, setLinkedAccounts] = useState([]);
 
   // OTP verification states
   const [otpState, setOtpState] = useState({
@@ -695,7 +694,7 @@ const ProfileSettings = () => {
     
     try {
       setOtpState(prev => ({ ...prev, otpLoading: true }));
-      const response = await userService.verifyOTPEmail(profileData.email, otpState.emailOtp);
+      await userService.verifyOTPEmail(profileData.email, otpState.emailOtp);
       setOtpState(prev => ({ ...prev, emailVerified: true, emailOtp: '', emailOtpSent: false }));
       setSuccess('Email verified successfully!');
       setTimeout(() => setSuccess(''), 3000);
@@ -718,7 +717,7 @@ const ProfileSettings = () => {
     
     try {
       setOtpState(prev => ({ ...prev, otpLoading: true }));
-      const response = await userService.verifyOTPPhone(profileData.phone, profileData.countryCode, otpState.phoneOtp);
+      await userService.verifyOTPPhone(profileData.phone, profileData.countryCode, otpState.phoneOtp);
       setOtpState(prev => ({ ...prev, phoneVerified: true, phoneOtp: '', phoneOtpSent: false }));
       setSuccess('Phone verified successfully!');
       setTimeout(() => setSuccess(''), 3000);

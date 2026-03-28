@@ -21,4 +21,5 @@ export const formatPrice = (priceInUSD) => {
   return formatINR(priceInINR);
 };
 
-export default { convertToINR, formatINR, formatPrice };
+const currencyUtils = { convertToINR, formatINR, formatPrice };
+export default currencyUtils;
