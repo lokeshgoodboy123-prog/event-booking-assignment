@@ -1,0 +1,48 @@
+services:
+  - type: web
+    name: event-booking-backend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && npm start
+    envVars:
+      - key: PORT
+        value: 5000
+      - key: NODE_ENV
+        value: production
+      - key: MONGO_URI
+        fromDatabase:
+          name: event-booking-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: STRIPE_SECRET_KEY
+        sync: false
+      - key: STRIPE_PUBLIC_KEY
+        sync: false
+      - key: CORS_ORIGIN
+        value: https://event-booking-frontend.onrender.com
+      - key: EMAIL_USER
+        sync: false
+      - key: EMAIL_PASSWORD
+        sync: false
+
+  - type: web
+    name: event-booking-frontend
+    env: node
+    region: oregon
+    plan: free
+    buildCommand: cd frontend && npm install && npm run build
+    startCommand: cd frontend && npm start
+    routes:
+      - path: /
+    envVars:
+      - key: REACT_APP_API_URL
+        value: https://event-booking-backend.onrender.com
+
+databases:
+  - name: event-booking-db
+    databaseName: event_booking
+    region: oregon
+    plan: free

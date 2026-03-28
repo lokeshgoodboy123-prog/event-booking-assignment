@@ -1,7 +1,9 @@
 import axios from 'axios';
 
-// Dynamically construct API URL based on current host
-const API_BASE_URL = `http://${window.location.hostname}:5000/api`;
+// Use environment variable for API URL, fallback to localhost for development
+const API_BASE_URL = process.env.REACT_APP_API_URL 
+  ? `${process.env.REACT_APP_API_URL}/api`
+  : `http://${window.location.hostname}:5000/api`;
 
 const api = axios.create({
   baseURL: API_BASE_URL,
