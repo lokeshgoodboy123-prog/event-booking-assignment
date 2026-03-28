@@ -1,0 +1,439 @@
+/* === PREMIUM EVENT CARD === */
+.event-card {
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(12px);
+  border-radius: 28px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 
+    0 4px 20px rgba(0, 0, 0, 0.08),
+    0 0 1px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  animation: cardPopIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, box-shadow;
+}
+
+@keyframes cardPopIn {
+  0% {
+    opacity: 0;
+    transform: translateY(25px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.event-card:hover {
+  transform: translateY(-16px) scale(1.025);
+  box-shadow: 
+    0 20px 80px rgba(102, 126, 234, 0.25),
+    0 0 1px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border-color: rgba(102, 126, 234, 0.4);
+}
+
+.event-card:hover .event-image img {
+  transform: scale(1.15) rotateZ(1deg);
+}
+
+/* === EVENT IMAGE SECTION === */
+.event-image {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.event-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  display: block;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, transparent 50%, rgba(0, 0, 0, 0.1) 100%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* === CATEGORY BADGE === */
+.event-category-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: white;
+  padding: 8px 16px;
+  border-radius: 24px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  z-index: 10;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.25);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.event-card:hover .event-category-badge {
+  background: rgba(102, 126, 234, 0.4);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.3);
+}
+
+/* === SEATS INDICATOR === */
+.seats-indicator {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  z-index: 10;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.seats-indicator.seats-good {
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.seats-indicator.seats-warning {
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.seats-indicator.seats-critical {
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  }
+  50% {
+    box-shadow: 0 4px 16px rgba(239, 68, 68, 0.3);
+  }
+}
+
+/* === EVENT DETAILS === */
+.event-details {
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 12px;
+}
+
+.event-title {
+  margin: 0;
+  color: #0a0a1a;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -0.4px;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* === ORGANIZER INFO === */
+.organizer-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(10, 10, 26, 0.7);
+  margin: 0;
+}
+
+.organizer-info svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.organizer-name {
+  font-weight: 600;
+  color: #667eea;
+}
+
+/* === EVENT META (Date, Location) === */
+.event-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  color: rgba(10, 10, 26, 0.65);
+  margin: 8px 0;
+  padding: 8px 0;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meta-item svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.6;
+  color: #667eea;
+  flex-shrink: 0;
+}
+
+.date-text,
+.location-text {
+  font-weight: 500;
+  display: -webkit-box;
+  line-clamp: 1;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* === EVENT DESCRIPTION === */
+.event-description {
+  color: rgba(10, 10, 26, 0.62);
+  font-size: 13px;
+  margin: 8px 0;
+  flex-grow: 1;
+  line-height: 1.6;
+  font-weight: 400;
+  display: -webkit-box;
+  line-clamp: 2;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* === EVENT FOOTER === */
+.event-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+  gap: 12px;
+  padding: 12px 0;
+  border-top: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.price-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.price-label {
+  font-size: 10px;
+  color: rgba(10, 10, 26, 0.5);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.event-price {
+  font-size: 28px;
+  font-weight: 900;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+}
+
+.seats-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.seats-info svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.7;
+}
+
+.seats-left {
+  color: rgba(10, 10, 26, 0.8);
+  font-weight: 600;
+}
+
+/* === VIEW DETAILS BUTTON === */
+.view-details-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.28);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.view-details-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+  transition: left 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.view-details-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(102, 126, 234, 0.35);
+}
+
+.view-details-btn:hover::before {
+  left: 100%;
+}
+
+.view-details-btn svg {
+  width: 16px;
+  height: 16px;
+  transition: transform 0.3s ease;
+}
+
+.view-details-btn:hover svg {
+  transform: translateX(3px);
+}
+
+.view-details-btn:active {
+  transform: translateY(-1px);
+}
+
+/* === RESPONSIVE DESIGN === */
+@media (max-width: 1024px) {
+  .event-card {
+    border-radius: 20px;
+  }
+
+  .event-image {
+    height: 240px;
+  }
+
+  .event-details {
+    padding: 24px;
+  }
+
+  .event-title {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 768px) {
+  .event-image {
+    height: 200px;
+  }
+
+  .event-details {
+    padding: 20px;
+    gap: 10px;
+  }
+
+  .event-title {
+    font-size: 16px;
+  }
+
+  .event-meta {
+    font-size: 12px;
+  }
+
+  .event-price {
+    font-size: 24px;
+  }
+
+  .seats-indicator {
+    font-size: 11px;
+    padding: 6px 12px;
+  }
+
+  .event-category-badge {
+    font-size: 10px;
+    padding: 6px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .event-card {
+    border-radius: 16px;
+  }
+
+  .event-image {
+    height: 180px;
+  }
+
+  .event-details {
+    padding: 16px;
+    gap: 8px;
+  }
+
+  .event-title {
+    font-size: 15px;
+  }
+
+  .event-description {
+    line-clamp: 1;
+    -webkit-line-clamp: 1;
+  }
+
+  .event-meta {
+    gap: 6px;
+    font-size: 11px;
+  }
+
+  .event-footer {
+    margin: 8px 0;
+    padding: 8px 0;
+  }
+
+  .event-price {
+    font-size: 22px;
+  }
+
+  .view-details-btn {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+}
