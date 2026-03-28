@@ -134,74 +134,7 @@
   color: #667eea;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .categories-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-  }
-
-  .category-card {
-    padding: 20px 12px;
-  }
-
-  .category-icon {
-    width: 60px;
-    height: 60px;
-    font-size: 36px;
-  }
-
-  .category-card:hover .category-icon {
-    font-size: 40px;
-  }
-
-  .category-name {
-    font-size: 13px;
-  }
-
-  .category-section h2 {
-    font-size: 24px;
-  }
-}
-
-@media (max-width: 480px) {
-  .categories-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-  }
-
-  .category-card {
-    padding: 16px 8px;
-  }
-
-  .category-icon {
-    width: 50px;
-    height: 50px;
-    font-size: 28px;
-    margin-bottom: 8px;
-  }
-
-  .category-card:hover .category-icon {
-    font-size: 32px;
-  }
-
-  .category-name {
-    font-size: 12px;
-  }
-
-  .category-section {
-    padding: 40px 20px;
-  }
-
-  .category-section h2 {
-    font-size: 20px;
-  }
-
-  .category-section p {
-    font-size: 12px;
-  }
-}
-
+/* Features Section */
 .features-section {
   max-width: 1200px;
   margin: 60px auto;
@@ -285,5 +218,120 @@
 
   .features-section h2 {
     font-size: 24px;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .category-card {
+    padding: 20px 12px;
+  }
+
+  .category-icon {
+    width: 60px;
+    height: 60px;
+    font-size: 36px;
+  }
+
+  .category-card:hover .category-icon {
+    font-size: 40px;
+  }
+
+  .category-name {
+    font-size: 13px;
+  }
+
+  .category-section h2 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 50px 20px;
+  }
+
+  .hero-section h1 {
+    font-size: 24px;
+  }
+
+  .hero-section p {
+    font-size: 14px;
+  }
+
+  .cta-button {
+    padding: 12px 30px;
+    font-size: 14px;
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .category-card {
+    padding: 16px 8px;
+  }
+
+  .category-icon {
+    width: 50px;
+    height: 50px;
+    font-size: 28px;
+    margin-bottom: 8px;
+  }
+
+  .category-card:hover .category-icon {
+    font-size: 32px;
+  }
+
+  .category-name {
+    font-size: 12px;
+  }
+
+  .category-section {
+    padding: 40px 20px;
+  }
+
+  .category-section h2 {
+    font-size: 20px;
+  }
+
+  .category-section p {
+    font-size: 12px;
+  }
+
+  .features-section h2 {
+    font-size: 20px;
+  }
+
+  .features-grid {
+    gap: 20px;
+  }
+
+  .feature-card {
+    padding: 20px;
+  }
+
+  .feature-card h3 {
+    font-size: 16px;
+  }
+
+  .feature-card p {
+    font-size: 12px;
+  }
+
+  .cta-section {
+    padding: 40px 20px;
+  }
+
+  .cta-section h2 {
+    font-size: 20px;
+  }
+
+  .primary-button {
+    padding: 12px 30px;
+    font-size: 14px;
   }
 }

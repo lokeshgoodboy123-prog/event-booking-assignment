@@ -11,8 +11,7 @@ const Home = () => {
     { id: 2, name: 'Comedy', emoji: '🎭', filter: 'comedy' },
     { id: 3, name: 'Theater', emoji: '🎪', filter: 'theater' },
     { id: 4, name: 'Sports', emoji: '⚽', filter: 'sports' },
-    { id: 5, name: 'Business', emoji: '💼', filter: 'conference' },
-    { id: 6, name: 'Other', emoji: '🎉', filter: 'other' }
+    { id: 5, name: 'Business', emoji: '💼', filter: 'conference' }
   ];
 
   const handleCategoryClick = (category) => {

@@ -126,7 +126,7 @@
 /* Modal Body */
 .modal-body {
   padding: 32px 30px;
-  max-height: 60vh;
+  max-height: 70vh;
   overflow-y: auto;
 }
 
@@ -152,8 +152,9 @@
 
 .summary-item.total {
   border-bottom: 2px solid #667eea;
-  padding: 12px 0;
+  padding: 16px 0;
   font-weight: 700;
+  margin-top: 8px;
 }
 
 .summary-item .label {
@@ -167,8 +168,15 @@
 }
 
 .summary-item .total-price {
-  color: #667eea;
-  font-size: 18px;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+  min-width: 100px;
+  text-align: right;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: inline-block;
 }
 
 .summary-divider {

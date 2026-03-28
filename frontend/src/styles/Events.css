@@ -364,7 +364,7 @@
 .events-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  gap: 45px;
+  gap: 40px;
   padding: 20px 0;
 }
 
@@ -379,8 +379,8 @@
   }
 
   .events-grid {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 38px;
+    grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+    gap: 36px;
   }
 
   .filters-section {
@@ -399,7 +399,7 @@
 
   .events-grid {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 32px;
+    gap: 30px;
   }
 }
 

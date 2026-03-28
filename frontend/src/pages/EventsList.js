@@ -44,10 +44,6 @@ const EventsList = () => {
       if (priceRange[0] > 0 || priceRange[1] < 500) {
         filteredEvents = filteredEvents.filter(event =>
           event.price >= priceRange[0] && event.price <= priceRange[1]
-
-  useEffect(() => {
-    fetchEvents();
-  }, [fetchEvents]);
         );
       }
 
@@ -66,7 +62,11 @@ const EventsList = () => {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [category, searchTitle, page, searchLocation, priceRange, selectedDate]);
+
+  useEffect(() => {
+    fetchEvents();
+  }, [fetchEvents]);
 
   const handleSearch = (title) => {
     setSearchTitle(title);

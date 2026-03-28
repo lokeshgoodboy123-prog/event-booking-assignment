@@ -34,18 +34,6 @@ const EventDetails = () => {
     fetchEvent();
   }, [fetchEvent]);
 
-  const fetchEvent = async () => {
-    try {
-      const response = await eventService.getEventById(id);
-      setEvent(response.data);
-      setError('');
-    } catch (err) {
-      setError('Failed to fetch event details');
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   // Generate booking reference ID
   const generateBookingReference = () => {
     const timestamp = Date.now().toString(36).toUpperCase();

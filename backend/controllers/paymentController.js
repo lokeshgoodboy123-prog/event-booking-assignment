@@ -4,10 +4,21 @@ const Booking = require('../models/Booking');
 const Notification = require('../models/Notification');
 const { v4: uuidv4 } = require('uuid');
 
-const razorpay = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID,
-  key_secret: process.env.RAZORPAY_KEY_SECRET
-});
+// Lazy initialize Razorpay with fallback
+let razorpay = null;
+
+const getRazorpayInstance = () => {
+  if (!razorpay) {
+    if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+      throw new Error('Razorpay credentials not configured in environment variables');
+    }
+    razorpay = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET
+    });
+  }
+  return razorpay;
+};
 
 // Create payment order
 exports.createPaymentIntent = async (req, res) => {
@@ -24,7 +35,7 @@ exports.createPaymentIntent = async (req, res) => {
       return res.status(404).json({ message: 'Booking not found' });
     }
 
-    const order = await razorpay.orders.create({
+    const order = await getRazorpayInstance().orders.create({
       amount: Math.round(amount * 100), // Convert to paise for INR
       currency: 'INR',
       receipt: `receipt_${booking._id}`,
