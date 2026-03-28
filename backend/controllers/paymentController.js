@@ -1,10 +1,15 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const Razorpay = require('razorpay');
 const Payment = require('../models/Payment');
 const Booking = require('../models/Booking');
 const Notification = require('../models/Notification');
 const { v4: uuidv4 } = require('uuid');
 
-// Create payment intent
+const razorpay = new Razorpay({
+  key_id: process.env.RAZORPAY_KEY_ID,
+  key_secret: process.env.RAZORPAY_KEY_SECRET
+});
+
+// Create payment order
 exports.createPaymentIntent = async (req, res) => {
   try {
     const { bookingId, amount } = req.body;
@@ -19,18 +24,21 @@ exports.createPaymentIntent = async (req, res) => {
       return res.status(404).json({ message: 'Booking not found' });
     }
 
-    const paymentIntent = await stripe.paymentIntents.create({
+    const order = await razorpay.orders.create({
       amount: Math.round(amount * 100), // Convert to paise for INR
-      currency: 'inr', // Changed from 'usd' to 'inr'
-      metadata: {
+      currency: 'INR',
+      receipt: `receipt_${booking._id}`,
+      notes: {
         bookingId: booking._id.toString(),
         userId: booking.user.toString()
       }
     });
 
     res.json({
-      clientSecret: paymentIntent.client_secret,
-      paymentIntentId: paymentIntent.id
+      orderId: order.id,
+      amount: order.amount,
+      currency: order.currency,
+      key_id: process.env.RAZORPAY_KEY_ID
     });
   } catch (error) {
     res.status(500).json({ message: 'Payment error', error: error.message });
@@ -40,7 +48,7 @@ exports.createPaymentIntent = async (req, res) => {
 // Process payment
 exports.processPayment = async (req, res) => {
   try {
-    const { bookingId, paymentIntentId, paymentMethodId } = req.body;
+    const { bookingId, razorpayOrderId, razorpayPaymentId, razorpaySignature } = req.body;
 
     const booking = await Booking.findById(bookingId);
     if (!booking) {
@@ -53,7 +61,9 @@ exports.processPayment = async (req, res) => {
       booking: bookingId,
       user: booking.user,
       amount: booking.totalPrice,
-      stripePaymentIntentId: paymentIntentId,
+      razorpayOrderId,
+      razorpayPaymentId,
+      razorpaySignature,
       transactionId,
       status: 'succeeded',
       paymentDate: new Date()
